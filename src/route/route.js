@@ -22,8 +22,8 @@ router.put("/user/:userId/profile", verifyTokenAndAuthorization, updateUser)
 
 // // PRODUCT's APIs -> (No Authentication)
 router.post("/products", createProduct)
-router.get("/products/:productId", getProductById)
-router.get("/products", getProductsByFilters)
+router.get("/products/:productId", getProductById)              // For both Admin and User
+router.get("/products", getProductsByFilters)                   // For both Admin and User
 router.put("/products/:productId", updateProduct)
 router.delete("/products/:productId", deleteByProductId)
 
