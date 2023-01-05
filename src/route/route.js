@@ -4,24 +4,23 @@ const { registerUser, login, getUserDetails, updateUser } = require("../controll
 const { createProduct, updateProduct, deleteByProductId, getProductById, getProductsByFilters } = require("../controller/productController")
 const { createCart, updateCart, getCart, deleteCart } = require("../controller/cartController")
 const { createOrder, updateOrder } = require("../controller/orderController")
-// const { Authentication, Authorization, verifyTokenAndAdmin } = require('../middleware/auth')
 const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../middleware/auth')
 
 
-// ADMIN's APIs -->
+// // ADMIN's APIs -->
 router.post("/products/:userId", verifyTokenAndAdmin, createProduct)
 router.put("/products/:userId/:productId", verifyTokenAndAdmin, updateProduct)
 router.delete("/products/:userId/:productId", verifyTokenAndAdmin, deleteByProductId)
 
 
-// USER's APIs ->
+// // USER's APIs ->
 router.post("/register", registerUser)
 router.post("/login", login)
 router.get("/user/:userId/profile", verifyToken, getUserDetails)
 router.put("/user/:userId/profile", verifyTokenAndAuthorization, updateUser)
 
 
-//PRODUCT's APIs -> (No Authentication)
+// // PRODUCT's APIs -> (No Authentication)
 router.post("/products", createProduct)
 router.get("/products/:productId", getProductById)
 router.get("/products", getProductsByFilters)
@@ -29,20 +28,20 @@ router.put("/products/:productId", updateProduct)
 router.delete("/products/:productId", deleteByProductId)
 
 
-// //Cart's APIs -> 
+// // Cart's APIs -> 
 router.post('/users/:userId/cart', verifyTokenAndAuthorization, createCart)
 router.put('/users/:userId/cart', verifyTokenAndAuthorization, updateCart)
 router.get('/users/:userId/cart', verifyTokenAndAuthorization, getCart)
 router.delete('/users/:userId/cart', verifyTokenAndAuthorization, deleteCart)
 
 
-// //Order's APIs -> 
+// // Order's APIs -> 
 router.post('/users/:userId/orders', verifyTokenAndAuthorization, createOrder)
 router.put('/users/:userId/orders', verifyTokenAndAuthorization, updateOrder)
 
 
 
-//if api is invalid OR wrong URL
+// // if api is invalid OR wrong URL
 router.all("**", function (req, res) {
     res.status(404).send({
         status: false,
