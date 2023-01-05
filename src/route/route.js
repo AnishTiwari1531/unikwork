@@ -3,7 +3,7 @@ const router = express.Router()
 const { registerUser, login, getUserDetails, updateUser } = require("../controller/userController")
 const { createProduct, updateProduct, deleteByProductId, getProductById, getProductsByFilters } = require("../controller/productController")
 const { createCart, updateCart, getCart, deleteCart } = require("../controller/cartController")
-const { createOrder, updateOrder } = require("../controller/orderController")
+const { createOrder, updateOrder, getOrderByUserName } = require("../controller/orderController")
 const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('../middleware/auth')
 
 
@@ -11,7 +11,7 @@ const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = requir
 router.post("/products/:userId", verifyTokenAndAdmin, createProduct)
 router.put("/products/:userId/:productId", verifyTokenAndAdmin, updateProduct)
 router.delete("/products/:userId/:productId", verifyTokenAndAdmin, deleteByProductId)
-
+router.get("/getOrderByUserName/:userId", verifyTokenAndAdmin, getOrderByUserName)
 
 // // USER's APIs ->
 router.post("/register", registerUser)

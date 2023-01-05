@@ -123,4 +123,19 @@ const updateOrder = async (req, res) => {
     }
 }
 
-module.exports = { createOrder, updateOrder }
+
+const getOrderByUserName = async (req, res) => {
+    try {
+        let name1 = req.query.fname;
+        let name2 = req.query.lname;
+        let name = name1 + " " + name2;
+        console.log(name)
+        const user = await userModel.findOne({ name });
+        const orders = await orderModel.find({ user: user._id });
+        res.status(200).send(orders);
+    } catch (err) {
+        res.status(500).send({ status: false, message: err.message })
+    }
+}
+
+module.exports = { createOrder, updateOrder, getOrderByUserName }
